@@ -31,10 +31,10 @@
                 <table class="cart-wishlist-table table">
                     <thead>
                     <tr>
-                        <th class="name" colspan="2">Product</th>
-                        <th class="price">Price</th>
-                        <th class="quantity">Quantity</th>
-                        <th class="subtotal">Total</th>
+                        <th class="name" colspan="2">{{ __('static.mehsul') }}</th>
+                        <th class="price">{{ __('static.qiymet') }}</th>
+                        <th class="quantity">{{ __('static.say') }}</th>
+                        <th class="subtotal">{{ __('static.toplam') }}</th>
                         <th class="remove">&nbsp;</th>
                     </tr>
                     </thead>
@@ -92,42 +92,42 @@
     <section class="section section-padding checkoutFr">
         <div class="container">
             <div class="section-title2">
-                <h2 class="title">Məlumatlarınız</h2>
+                <h2 class="title">{{ __('static.melumatlariniz') }}</h2>
             </div>
-            <form action="#" class="checkout-form learts-mb-50">
+            <form action="{{ route('front.order') }}" class="checkout-form learts-mb-50" id="orderForm">
                 <div class="row">
                     <div class="col-md-6 col-12 learts-mb-20">
-                        <label for="bdFirstName">Adınız <abbr class="required">*</abbr></label>
-                        <input type="text" id="bdFirstName" placeholder="Aydan">
+                        <label for="bdFirstName">{{ __('static.adiniz') }} <abbr class="required">*</abbr></label>
+                        <input type="text" id="bdFirstName" name="ad" placeholder="Aydan">
                     </div>
                     <div class="col-md-6 col-12 learts-mb-20">
-                        <label for="bdLastName">Soyadınız <abbr class="required">*</abbr></label>
-                        <input type="text" id="bdLastName" placeholder="Ismayılova">
+                        <label for="bdLastName">{{ __('static.soyadiniz') }} <abbr class="required">*</abbr></label>
+                        <input type="text" id="bdLastName" name="soyad" placeholder="Ismayılova">
                     </div>
                     <div class="col-12 learts-mb-20">
-                        <label for="bdAddress1">Ünvan <abbr class="required">*</abbr></label>
-                        <input type="text" id="bdAddress1" placeholder="Bakı,Azərbaycan">
+                        <label for="bdAddress1">{{ __('static.unvan') }} <abbr class="required">*</abbr></label>
+                        <input type="text" id="bdAddress1" name="unvan" placeholder="Bakı,Azərbaycan">
                     </div>
                     <div class="col-12 learts-mb-20">
-                        <label for="bdPostcode">Poçt Kodu <abbr class="required">*</abbr></label>
-                        <input type="text" id="bdPostcode" placeholder="Az1000">
+                        <label for="bdPostcode">{{ __('static.poct_kodu') }} <abbr class="required">*</abbr></label>
+                        <input type="text" id="bdPostcode" name="poct_kodu" placeholder="Az1000">
                     </div>
                     <div class="col-md-6 col-12 learts-mb-20">
-                        <label for="bdEmail">Email <abbr class="required">*</abbr></label>
-                        <input type="text" id="bdEmail" placeholder="aydan@gmail.com">
+                        <label for="bdEmail">{{ __('static.email') }} <abbr class="required">*</abbr></label>
+                        <input type="text" id="bdEmail" name="email" placeholder="aydan@gmail.com">
                     </div>
                     <div class="col-md-6 col-12 learts-mb-30">
-                        <label for="bdPhone">Telefon <abbr class="required">*</abbr></label>
-                        <input type="phone" id="bdPhone" placeholder="994505555555">
+                        <label for="bdPhone">{{ __('static.telefon') }} <abbr class="required">*</abbr></label>
+                        <input type="phone" id="bdPhone" name="telefon" placeholder="994505555555">
                     </div>
                     <div class="col-12 learts-mb-20">
-                        <label for="bdOrderNote">Əlavə şərh</label>
-                        <textarea id="bdOrderNote" placeholder="Şərhinizi yazın"></textarea>
+                        <label for="bdOrderNote">{{ __('static.elave_serh') }}</label>
+                        <textarea id="bdOrderNote" name="elave_serh" placeholder="{{ __('static.serhinizi_yazin') }}"></textarea>
                     </div>
                 </div>
             </form>
             <div class="section-title2 ">
-                <h2 class="title">Sifariş</h2>
+                <h2 class="title">{{ __('static.sifaris') }}</h2>
             </div>
             <div class="row learts-mb-n30 tabbl">
                 <div class="col-lg-6 order-lg-2 learts-mb-30">
@@ -135,8 +135,8 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th class="name">Məhsul</th>
-                                <th class="total">Məbləğ</th>
+                                <th class="name">{{ __('static.mehsul') }}</th>
+                                <th class="total">{{ __('static.məbləg') }}</th>
                             </tr>
                             </thead>
                             <tbody id="totalSebet2">
@@ -155,11 +155,11 @@
                             </tbody>
                             <tfoot>
                             <tr class="subtotal">
-                                <th>Toplam</th>
+                                <th>{{ __('static.toplam') }}</th>
                                 <td><span class="totalPrice">242 </span>$</td>
                             </tr>
                             <tr class="total">
-                                <th>Yekun Məbləğ</th>
+                                <th>{{ __('static.yekun_megleg') }}</th>
                                 <td><strong><span class="totalPrice">242 </span>$</strong></td>
                             </tr>
                             </tfoot>
@@ -172,19 +172,19 @@
                             <div class="accordion" id="paymentMethod">
                                 <div class="card active">
                                     <div class="card-header">
-                                        <button data-bs-toggle="collapse" data-bs-target="#checkPayments">Kuryerlə Ödəniş</button>
+                                        <button data-bs-toggle="collapse" data-bs-target="#checkPayments"  name="kuryerle_odenis">{{ __('static.kuryerle_odenis') }}</button>
                                     </div>
                                     <div id="checkPayments" class="collapse show" data-bs-parent="#paymentMethod">
                                         <div class="card-body">
-                                            <p>Zəhmət olmasa bütün məlumatları doldurun.</p>
+                                            <p>{{ __('static.zehmet_olmasa_butun') }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center">
-                            <p class="payment-note" style="font-style: italic; opacity: .7; text-align: start;">Şəxsi məlumatlarınız sifarişinizi emal etmək, bu veb saytdakı təcrübənizi dəstəkləmək və məxfilik siyasətimizdə təsvir olunan digər məqsədlər üçün istifadə ediləcək.</p>
-                            <button class="btn btn-dark btn-outline-hover-dark">Sifariş et</button>
+                            <p class="payment-note" style="font-style: italic; opacity: .7; text-align: start;">{{ __('static.sexsi_melumatlariniz') }}</p>
+                            <button class="btn btn-dark btn-outline-hover-dark" id="sifaris_et">{{ __('static.sifaris_et') }}</button>
                         </div>
                     </div>
                 </div>
@@ -226,6 +226,34 @@
                 }
             })
         }
+
+        $('#sifaris_et').click(function () {
+            let my_form = document.getElementById('orderForm');
+            my_form     =  new FormData(my_form);
+            var actionUrl = $('#orderForm').attr('action');
+            $.ajax({
+                type: "POST",
+                url: actionUrl,
+                data: my_form, // serializes the form's elements.
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data)
+                {
+                    toastr.success(data.message);
+
+                    setTimeout(function () {
+                        window.location.href = '{!! route('front.shopping.cart') !!}';
+                    },1000);
+                },
+                error : function (myErrors) {
+                    $.each(myErrors.responseJSON.errors, function (key, error) {
+                        toastr.error(error)
+                    })
+                }
+            });
+
+        });
     </script>
 @endsection
 

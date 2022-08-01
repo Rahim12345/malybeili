@@ -53,6 +53,9 @@ Route::group(['middleware'=>'locale'], function (){
     Route::get('shopping-cart', [PagesController::class,'shoppingCart'])
         ->name('front.shopping.cart');
 
+    Route::post('order',[PagesController::class,'Order'])
+        ->name('front.order');
+
     Route::get('test', function (){
         $array = unserialize(Cookie::get('sebet'));
         dd($array);

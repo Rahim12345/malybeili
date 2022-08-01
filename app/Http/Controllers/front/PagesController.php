@@ -10,9 +10,11 @@ use App\Http\Requests\SignRequest;
 use App\Models\About;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Customer;
 use App\Models\HomeBanner;
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\SelledProducts;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -202,6 +204,66 @@ class PagesController extends Controller
     public function shoppingCart()
     {
         return view('front.pages.shopping-cart');
+    }
+
+    public function Order(Request $request)
+    {
+        $this->validate($request,[
+            'ad'=>'required|max:30',
+            'soyad'=>'required|max:30',
+            'unvan'=>'nullable|max:200',
+            'poct_kodu'=>'nullable|max:100',
+            'email'=>'required|max:200',
+            'telefon'=>'required|max:200',
+            'elave_serh'=>'nullable|max:200',
+        ],[],[
+            'ad'=>__('static.adiniz'),
+            'soyad'=>__('static.soyadiniz'),
+            'unvan'=>__('static.unvan'),
+            'poct_kodu'=>__('static.poct_kodu'),
+            'email'=>__('static.email'),
+            'telefon'=>__('static.telefon'),
+            'elave_serh'=>__('static.elave_serh'),
+        ]);
+
+        $sebet  = unserialize(Cookie::get('sebet'));
+        if ($sebet === false || empty($sebet))
+        {
+            return response()->json([
+                'errors'=>[
+                    'bos_sebet'=>__('static.sebet_bosdur')
+                ]
+            ],422);
+        }
+
+        $customer   = Customer::create([
+            'ad'=>$request->ad,
+            'soyad'=>$request->soyad,
+            'unvan'=>$request->unvan,
+            'poct_kodu'=>$request->poct_kodu,
+            'email'=>$request->email,
+            'telefon'=>$request->telefon,
+            'elave_serh'=>$request->elave_serh,
+        ]);
+
+        foreach ($sebet as $key=>$item)
+        {
+            $mehsul = Product::findOrFail($key);
+            SelledProducts::create([
+                'customer_id'=>$customer->id,
+                'mehsul_id'=>$key,
+                'say'=>$item,
+                'cari_qiymet'=>$mehsul->price,
+            ]);
+        }
+
+        Cookie::queue(
+            Cookie::forget('sebet')
+        );
+
+        return \response()->json([
+            'message'=>__('static.sifaris_tamamlandi')
+        ],200);
     }
 
     public function login()
