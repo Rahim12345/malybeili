@@ -12,4 +12,14 @@ class SelledProducts extends Model
     protected $table = 'selled_products';
 
     protected $guarded = [];
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class,'id','customer_id');
+    }
+
+    public function product()
+    {
+        return $this->hasOne(Product::class,'id','mehsul_id');
+    }
 }

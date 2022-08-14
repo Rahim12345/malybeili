@@ -92,6 +92,12 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="dropdown-menu-column" bis_skin_checked="1">
+                                <a class="dropdown-item" href="{{ route('sifaris.index') }}">
+                                    Sifarişlər
+                                </a>
+                            </div>
                         </div>
                     </li>
                 </ul>

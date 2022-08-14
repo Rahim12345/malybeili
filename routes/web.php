@@ -9,6 +9,7 @@ use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Sifaris;
 use App\Http\Controllers\sign\sign_in_upController;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
@@ -107,4 +108,8 @@ Route::group(['prefix'=>'admin','middleware'=>['admin', 'locale']],function (){
     Route::post('product-photo-delete', [ProductController::class, 'photoDelete'])->name('back.photo.delete');
 
     Route::resource('review', ReviewController::class);
+
+    Route::resource('sifaris', Sifaris::class);
+
+
 });

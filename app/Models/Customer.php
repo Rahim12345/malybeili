@@ -12,4 +12,9 @@ class Customer extends Model
     protected $table = 'customers';
 
     protected $guarded = [];
+
+    public function buy_products()
+    {
+        return $this->hasMany(SelledProducts::class,'customer_id','id');
+    }
 }

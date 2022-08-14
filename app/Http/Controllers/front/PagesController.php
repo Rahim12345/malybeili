@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
 use App\Http\Requests\SebetRequest;
 use App\Http\Requests\SignRequest;
+use App\Mail\ContactEmail;
 use App\Models\About;
 use App\Models\Category;
 use App\Models\Contact;
@@ -18,6 +19,7 @@ use App\Models\SelledProducts;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 
 class PagesController extends Controller
@@ -260,6 +262,34 @@ class PagesController extends Controller
         Cookie::queue(
             Cookie::forget('sebet')
         );
+
+        $title                  = $request->ad.' '.$request->soyad.' tərəfindən yeni elektron müraciət daxil oldu.';
+        $text                   = '
+            <table>
+                <tr>
+                    <td>Ad,Soyad:</td>
+                    <td>'.$request->ad.' '.$request->soyad.'</td>
+                </tr>
+                <tr>
+                    <td>Əlaqə nömrəsi:</td>
+                    <td>'.$request->telefon.'</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>'.$request->email.'</td>
+                </tr>
+                <tr>
+                    <td>Mesaj:</td>
+                    <td>'.$request->elave_serh.'</td>
+                </tr>
+            </table>
+            ';
+
+        $details = [
+            'title' => $title,
+            'body'  => $text
+        ];
+        Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactEmail($details));
 
         return \response()->json([
             'message'=>__('static.sifaris_tamamlandi')
